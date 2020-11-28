@@ -20,7 +20,7 @@
       <h2>Functional Tests Example</h2>
       <div class="pane">
         <h4>Famous Italian Explorers</h4>
-        <form action="/travellers" method="POST" id="f1">
+        <form action="/travellers" method="POST" id="f1" name="surname">
           <label for="i1">surname: </label>
           <input id="i1" type="text" name="surname" placeholder="try with 'Polo'...">
           <button type="submit">submit</button>
@@ -43,5 +43,26 @@
       </div>
     </main>
     <script src='/client.js'></script>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous"></script>
+    <script>
+      $(function(){
+        $('#f1').submit(function(e){
+          e.preventDefault();
+          $.ajax({
+            url: '/travellers',
+            type: 'get',
+            data: $(this).serialize(),
+            success: function(data){
+              var div = $('#tn');
+              div.html(`<p>first name: <span id="name">${data.name}</span></p>` + `<p>last name: <span id="surname">${data.surname}</span></p>` + `<p>dates: <span id="dates">${data.dates}</span></p>`)
+            }
+          })
+        })
+      })
+    </script>
   </body>
 </html>
+
+

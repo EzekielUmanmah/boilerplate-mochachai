@@ -64,7 +64,7 @@ suite('Functional Tests', function() {
       /**  Another one... **/
       test('Test GET /hello with your name',  function(done){ // Don't forget the callback...
          chai.request(server)             // 'server' is the Express App
-          .get('/hello?name=Jon') /** <=== Put your name in the query **/ 
+          .get('/hello?name=Jon') /** <=== Put your name in the query **/
           .end(function(err, res){        // res is the response object
           
             // Your tests here.

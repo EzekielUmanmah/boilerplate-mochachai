@@ -21,8 +21,53 @@ app.get('/hello', function(req, res){
 
 var travellers = function(req, res){
   var data = {};
+  console.log('travellers', req.body, req.query)
   if(req.body && req.body.surname) {
     switch(req.body.surname.toLowerCase()) {
+      case 'polo' :
+        data = {
+          name: 'Marco',
+          surname: 'Polo',
+          dates: '1254 - 1324'
+        };
+        break;
+      case 'colombo' :
+        data = {
+          name: 'Cristoforo',
+          surname: 'Colombo',
+          dates: '1451 - 1506'
+        };
+        break;
+      case 'vespucci' :
+        data = {
+          name: 'Amerigo',
+          surname: 'Vespucci',
+          dates: '1454 - 1512'
+        };
+        break;
+      case 'da verrazzano':
+      case 'verrazzano':
+        data = {
+          name: 'Giovanni',
+          surname: 'da Verrazzano',
+          dates: '1485 - 1528'
+        };
+        break;
+      default:
+        data = {
+          name: 'unknown'
+        }
+    } console.log(data)
+  }
+  res.json(data);
+};
+
+
+var traveller = function(req, res){
+  var data = {};
+  console.log('traveller', req.query, req.body)
+  if(req.query && req.query.surname) {
+    switch(req.query.surname.toLowerCase()) {
       case 'polo' :
         data = {
           name: 'Marco',
@@ -61,9 +106,10 @@ var travellers = function(req, res){
   res.json(data);
 };
 
-
 app.route('/travellers')
-  .put(travellers);
+  .put(travellers)
+  .get(traveller);
+
 
 var error;
 app.get('/_api/get-tests', cors(), function(req, res, next){
